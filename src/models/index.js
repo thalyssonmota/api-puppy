@@ -1,6 +1,6 @@
-const sequelize = require('sequelize');
-const Users = require('./user');
-const Dogs = require('./dog');
+const sequelize = require('../config/database');
+const Users = require('./users');
+const Dogs = require('./dogs');
 
 sequelize.sync({ alter: true })
   .then(() => {
