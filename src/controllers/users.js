@@ -1,4 +1,5 @@
 const { Users } = require('../models');
+const bcrypt = require('bcrypt')
 
 async function getUsers(req, res) {
   try {
@@ -13,6 +14,8 @@ async function getUsers(req, res) {
 }
 
 async function postUsers(req, res) {
+  const {password} = req.body
+  
   try {
     const users = await Users.create(req.body);
     return res.status(201).send(users);
