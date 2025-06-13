@@ -17,8 +17,16 @@ async function postUsers(req, res) {
   const {password} = req.body
   
   try {
-    const users = await Users.create(req.body);
-    return res.status(201).send(users);
+    bcrypt.hash(password, 10, async (err, hash) => {
+      if (err) {
+        return res.status(500).send({
+          error: 'Erro ao criptografar a senha'
+        });
+      }
+      req.body.password = hash;
+    });
+    await Users.create(req.body);
+    return res.status(201).send('Usuário criado com sucesso');
   } catch (error) {
     console.error(error);
     return res.status(500).send({
@@ -26,13 +34,15 @@ async function postUsers(req, res) {
     });
   }
 }
+
 async function deleteUsers(req, res) {
   try {
     const { id } = req.params;
     await Users.destroy(
-      { where: 
-        { id: id }
-       }
+      {
+        where:
+          { id: id }
+      }
     );
     return res.status(204).send();
   } catch (error) {
