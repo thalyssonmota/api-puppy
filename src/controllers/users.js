@@ -14,17 +14,8 @@ async function getUsers(req, res) {
 }
 
 async function postUsers(req, res) {
-  const {password} = req.body
-  
+
   try {
-    bcrypt.hash(password, 10, async (err, hash) => {
-      if (err) {
-        return res.status(500).send({
-          error: 'Erro ao criptografar a senha'
-        });
-      }
-      req.body.password = hash;
-    });
     await Users.create(req.body);
     return res.status(201).send('Usuário criado com sucesso');
   } catch (error) {

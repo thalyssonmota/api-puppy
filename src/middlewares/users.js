@@ -28,7 +28,7 @@ async function validateCreateUser(req, res, next) {
         })
     }
 
-    if(!nascimento || isNaN) {
+    if(!nascimento) {
         return res.status(400).send({
             error: 'Data deve ser válida'
         })
