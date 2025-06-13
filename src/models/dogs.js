@@ -1,4 +1,4 @@
-const {DataTy,DataTypes} = require('sequelize');
+const {DataTypes} = require('sequelize');
 const sequelize = require('../config/database');
 
 const Dogs = sequelize.define('Dogs', {
@@ -33,5 +33,15 @@ const Dogs = sequelize.define('Dogs', {
   chip:{
     type: DataTypes.BOOLEAN,
     allowNull: false
-  }
+  },
+  image_url:{
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+      isUrl: true
+    }
+  },
+
 });
+
+module.exports = Dogs;

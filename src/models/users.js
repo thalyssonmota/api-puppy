@@ -22,10 +22,7 @@ const Users = sequelize.define('Users', {
   cpf: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
-    validate: {
-      is: /^\d{11}$/ // Validates Brazilian CPF format (11 digits)
-    }
+    unique: true
   },
   nascimento: {
     type: DataTypes.DATE,
