@@ -34,12 +34,6 @@ async function validateCreateUser(req, res, next) {
         })
     }
 
-    if(email.length > 255) {
-        return res.status(400).send({
-            error: 'O email não pode ter mais que 255 caracteres'
-        })
-    }
-
     const existingUser = await Users.findOne({
         where: {
             email: email
